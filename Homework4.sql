@@ -11,7 +11,7 @@ USE vk;
 /* Подсчитать количество групп, в которые вступил каждый пользователь. */
 
   SELECT users.lastname, users.firstname, COUNT(community_id) AS communities_count
-	FROM users 
+    FROM users 
     JOIN users_communities ON users.id = users_communities.user_id
 GROUP BY users.id
 ORDER BY users.lastname;
@@ -27,7 +27,7 @@ ORDER BY communities.name;
 /* Пусть задан некоторый пользователь. Из всех пользователей соц. сети найдите человека, 
 который больше всех общался с выбранным пользователем (написал ему сообщений). */
 
-	 SET @target_user_id = 1;           -- Зададим целевого пользователя с id = 1
+     SET @target_user_id = 1;           -- Зададим целевого пользователя с id = 1
      
   SELECT users.firstname, users.lastname
     FROM messages 
@@ -48,7 +48,8 @@ SELECT COUNT(likes.id) AS likes_to_youngs
 /* Определить кто больше поставил лайков (всего): мужчины или женщины. */
 
   SELECT profiles.gender AS most_likes_given_by_gender
-    FROM likes JOIN profiles ON likes.user_id = profiles.user_id
+    FROM likes 
+    JOIN profiles ON likes.user_id = profiles.user_id
 GROUP BY profiles.gender
 ORDER BY COUNT(likes.id) DESC
    LIMIT 1;
